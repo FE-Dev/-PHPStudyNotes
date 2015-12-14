@@ -19,11 +19,26 @@
 5. documentroot是目录，servername是域名，随便输你想要的域名都可以，等会通过修改hosts文件重定向
 6. 从系统托盘打开 Apache 的配置文件 httpd.conf
 7. 找到 include conf/extra/httpd-vhosts.conf ，删掉前面的#，取消掉注释
-8. 还是在 Apache 的配置文件里找到网站放置目录 <Directory "f:/">，这里默认在安装目录下，如果按照前面的修改过的话，就是自定义目录
+8. 还是在 Apache 的配置文件里找到网站放置目录 \<Directory "f:/"\>，这里默认在安装目录下，如果按照前面的修改过的话，就是自定义目录
 9. 往下滚动，找到 Deny from all  Allow from 127.0.0.1
 10. 改 deny from all 为allow from all，注释127.0.0.1那行
 11. 修改完成，重启服务
 12. 打开系统 hosts 文件，添加 127.0.0.1 xxx.com
+
+**更新：**  
+2015年12月14日  
+现在的版本里，第九步已经不一样了，只有如下两行：
+
+	#   onlineoffline tag - don't remove
+	    Require local
+
+经手动补全并修改如下后成功配置多站点：
+
+	#   onlineoffline tag - don't remove
+	    Require local
+	    Order Deny,Allow
+	    Allow from all
+	    #Allow from 127.0.0.1
 
 
 # 自定义 Apache 端口号
